@@ -18,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource(name: '/roles', controller: 'App\Http\Controllers\Modulo_usuarios\API\RoleController');
 Route::apiResource(name: '/permisos', controller: 'App\Http\Controllers\Modulo_usuarios\API\PermisoController');
 Route::apiResource(name: '/usuarios', controller: 'App\Http\Controllers\Modulo_usuarios\API\UsuarioController');
+
+// Modulo llaves: 
+Route::apiResource(name: '/centros', controller: 'App\Http\Controllers\Modulo_llaves\API\CentroFormacionController');

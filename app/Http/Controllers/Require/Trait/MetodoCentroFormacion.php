@@ -15,21 +15,24 @@ trait MetodoCentroFormacion{
         //Se instancia la clase 'Validate', para validar los datos de las propiedades:
         $validate = new Validate;
 
+        // Declaramos el array 'valid', para almacenar las propiedades validadas: 
+        $valid = [];
+
         //Se valida que los campos no esten vacios:
-        if (!empty($data->nombre_centro)) {
+        if (!empty($data->new_nombre_centro)) {
 
             //Se valida que el campo sea un String:
-            if ($validate->validateString($data->nombre_centro)) {
+            if ($validate->validateString($data->new_nombre_centro)) {
 
-                //Retornamos la respuesta!!! :D:
-                return ['registrar' => true];
+                // Agregamos el campo validado: 
+                $valid['new_nombre_centro'] = true;
             }else{
 
                 //Retornamos el error :/ ):
                 die('{ "registrar":false, "error":"El nombre del centro no debe contener numeros" }');
             }
         }else{
-            die('{"registrar":false, "error":"El campo nombre_centro no debe estar vacio"}');
+            die('{"registrar":false, "error":"El campo new_nombre_centro no debe estar vacio"}');
         }
 
         //Se valida que los campos no esten vacios:
@@ -38,8 +41,8 @@ trait MetodoCentroFormacion{
             //Se valida que el campo sea un String:
             if ($validate->validateString($data->direccion)) {
 
-                //Retornamos la respuesta!!! :D:
-                return ['registrar' => true];
+                // Agregamos el campo validado: 
+                $valid['direccion'] = true;
             }else{
 
                 //Retornamos el error :/ ):
@@ -55,8 +58,8 @@ trait MetodoCentroFormacion{
 
             if ($validate->validateString($data->telefono)) {
 
-                //Retornamos la respuesta :D ):
-                return ['registrar' => true];
+                // Agregamos el campo validado: 
+                $valid['telefono'] = true;
             }else{
 
                 //Retornamos el error :/ ):
@@ -69,6 +72,9 @@ trait MetodoCentroFormacion{
             die('{"registrar":false, "error":"El campo telefono no debe estar vacio"}');
         }
 
+        // Retornamos la respuesta: 
+        return ['registrar' => true, 'campos' => $valid];
+
     }
 
     //Metodo para actualizar las propiedades de la instancia de la Clase 'CentroFormacion':
@@ -80,21 +86,24 @@ trait MetodoCentroFormacion{
         //Se instancia la clase 'Validate', para validar los datos de las propiedades:
         $validate = new Validate;
 
+        // Declaramos el array 'valid', para almacenar las propiedades validadas: 
+        $valid = [];
+
         //Se valida que los campos no esten vacios:
-        if (!empty($data->nombre_centro)) {
+        if (!empty($data->new_nombre_centro)) {
 
             //Se valida que el campo sea un String:
-            if ($validate->validateString($data->nombre_centro)) {
+            if ($validate->validateString($data->new_nombre_centro)) {
 
-                //Retornamos la respuesta!!! :D:
-                return ['registrar' => true];
+                // Agregamos el campo validado: 
+                $valid['new_nombre_centro'] = true;
             }else{
 
                 //Retornamos el error :/ ):
-                die('{ "registrar":false, "error":"El nuevo_nombre del centro no debe contener numeros" }');
+                die('{ "registrar":false, "error":"El nombre del centro no debe contener numeros" }');
             }
         }else{
-            die('{"registrar":false, "error":"El campo nuevo_nombre_centro no debe estar vacio"}');
+            die('{"registrar":false, "error":"El campo new_nombre_centro no debe estar vacio"}');
         }
 
         //Se valida que los campos no esten vacios:
@@ -103,25 +112,25 @@ trait MetodoCentroFormacion{
             //Se valida que el campo sea un String:
             if ($validate->validateString($data->direccion)) {
 
-                //Retornamos la respuesta!!! :D:
-                return ['registrar' => true];
+                // Agregamos el campo validado: 
+                $valid['direccion'] = true;
             }else{
 
                 //Retornamos el error :/ ):
-                die('{ "registrar":false, "error":"El nombre del nuevo_centro no debe contener numeros" }');
+                die('{ "registrar":false, "error":"El nombre del centro no debe contener numeros" }');
             }
         }else{
 
             //Retornamos el error :/ ):
-            die('{"registrar":false, "error":"El campo nuevo_direccion no debe estar vacio"}');
+            die('{"registrar":false, "error":"El campo direccion no debe estar vacio"}');
         }
 
         if (!empty($data->telefono)) {
 
             if ($validate->validateString($data->telefono)) {
 
-                //Retornamos la respuesta :D ):
-                return ['registrar' => true];
+                // Agregamos el campo validado: 
+                $valid['telefono'] = true;
             }else{
 
                 //Retornamos el error :/ ):
@@ -131,8 +140,12 @@ trait MetodoCentroFormacion{
         }else{
 
             //Retornamos el error :/ ):
-            die('{"registrar":false, "error":"El campo nuevo_telefono no debe estar vacio"}');
+            die('{"registrar":false, "error":"El campo telefono no debe estar vacio"}');
         }
+
+        // Retornamos la respuesta: 
+        return ['registrar' => true, 'campos' => $valid];
+
 
     }
 

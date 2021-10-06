@@ -37,7 +37,7 @@ class UsuarioController extends Controller
         $nombre         = strtolower($request->input(key: 'nombre'));
         $apellido       = strtolower($request->input(key: 'apellido'));
         $email          = strtolower($request->input(key: 'email'));
-        $nombre_role           = strtolower($request->input(key: 'role'));
+        $nombre_role    = strtolower($request->input(key: 'role'));
 
         // Validamos que los argumentos no esten vacios: 
         if(!empty($request->input(key: 'identificacion'))

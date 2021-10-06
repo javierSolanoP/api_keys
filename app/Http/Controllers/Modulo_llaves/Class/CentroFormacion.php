@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Modulo_llaves\Class;
 
+use App\Http\Controllers\Require\Trait\MetodoCentroFormacion;
+
 class CentroFormacion {
 
     public function __construct(
@@ -9,4 +11,6 @@ class CentroFormacion {
         private $direccion = '',
         private $telefono = ''
     ){}
+
+    use MetodoCentroFormacion;
 }
