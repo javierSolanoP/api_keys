@@ -7,6 +7,7 @@ use App\Http\Controllers\Modulo_usuarios\Class\Permiso as ClassPermiso;
 use App\Models\Permiso;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PermisoController extends Controller
 {
@@ -14,10 +15,20 @@ class PermisoController extends Controller
     public function index()
     {
         // Realizamos la consulta a la tabla de la DB: 
-        $model = Permiso::select('nombre_permiso as permiso')->get();
+        $model = DB::table('permisos')
+
+                // Realizamos la consulata a la tabla del modelo 'Role': 
+                ->join('roles', 'roles.id_role', '=', 'permisos.role_id')
+
+                // Seleccionamos los campos que se requieren: 
+                ->select('roles.nombre_role', 'permisos.nombre_permiso')
+
+                // Traemos todos los registros que se encuentren en la tabla del modelo 'Permiso': 
+                ->get();
 
         // Retornamos la respuesta: 
         return ['query' => true, 'permisos' => $model];
+
     }
 
     // Metodo para registrar un nuevo permiso en la tabla de la DB: 
@@ -97,13 +108,22 @@ class PermisoController extends Controller
     }
 
     // Metodo para retornar un registro en especifico de la tabla de la DB: 
-    public function show($nombre_permiso)
+    public function show($permiso)
     {
         // Si el argumento contiene caracteres de tipo mayusculas, los pasamos a tipo minusculas. Para seguir una nomenclatura estandar: 
-        $nombre_permiso = strtolower($nombre_permiso);
+        $nombre_permiso = strtolower($permiso);
 
         // Realizamos la consulta a la tabla de la DB: 
-        $model = Permiso::select('id_permiso', 'nombre_permiso as permiso');
+        $model = DB::table('permisos')
+
+                // Filtramos el registro solicitado: 
+                ->where('nombre_permiso', $nombre_permiso)
+
+                // Realizamos la consulta a la tabla del modelo 'Role': 
+                ->join('roles', 'roles.id_role', '=', 'permisos.role_id')
+
+                // Seleccionamos los campos que requerimos: 
+                ->select('roles.nombre_role as role', 'permisos.nombre_permiso as permiso');
 
         // Validamos que exista el permiso en la tabla de la DB: 
         $validarPermiso = $model->first();
@@ -157,7 +177,7 @@ class PermisoController extends Controller
                     $_SESSION['registrar'] = $permiso; 
 
                     // Validamos el argumento: 
-                    $validarPermisoArgm = $permiso->registerData();
+                    $validarPermisoArgm = $permiso->updateData();
 
                     // Si el argumento ha sido validado, realizamos el registro: 
                     if($validarPermisoArgm['registrar']){
@@ -199,8 +219,38 @@ class PermisoController extends Controller
     }
 
     // Metodo para eliminar un regitro especifico de la tabla de la DB: 
-    public function destroy($id)
+    public function destroy($permiso)
     {
-        //
+        // Si el argumento contiene caracteres de tipo mayusculas, los pasamos a tipo minusculas. Para seguir una nomenclatura estandar: 
+        $nombre_permiso    = strtolower($permiso);
+
+        // Realizamos la consulta a la tabla de la DB: 
+        $model = Permiso::where('nombre_permiso', $nombre_permiso);
+
+        // Validamos que exista el permiso en la tabla de la DB: 
+        $validarPermiso = $model->first();
+
+        // Si existe, eliminamos el registro: 
+        if($validarPermiso){
+
+            try{
+
+                // Eliminamos el registro: 
+                $model->delete();
+
+                // Retornamos la respuesta: 
+                return ['delete' => true, 'permiso' => $validarPermiso];
+
+
+            }catch(Exception $e){
+                // Retornamos el error: 
+                return ['delete' => false, 'error' => $e->getMessage()];
+            }
+            
+        }else{
+            // Retornamos el error: 
+            return ['delete' => false, 'error' => 'No existe ese permiso en el sistema.'];
+        }
+
     }
 }

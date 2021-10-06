@@ -12,4 +12,10 @@ class Permiso extends Model
     protected $fillable = ['nombre_permiso', 'role_id'];
 
     protected $hidden = ['created_at', 'updated_at'];
+
+    // Relacion con el modelo 'Role': 
+    public function role()
+    {
+        return $this->belongsTo(related: Role::class, foreignKey: 'role_id', ownerKey: 'id_role');
+    }
 }

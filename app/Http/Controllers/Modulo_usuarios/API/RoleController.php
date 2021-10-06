@@ -131,7 +131,7 @@ class RoleController extends Controller
                 $_SESSION['registrar'] = $role;
 
                 // Validamos el argumento: 
-                $validarRoleArgm = $role->registerData();
+                $validarRoleArgm = $role->updateData();
 
                 // Si el argumento ha sido validado, realizamos el registro: 
                 if($validarRoleArgm['registrar']){

@@ -22,7 +22,7 @@ trait MetodoUsuario{
         if (!empty($data->identificacion)) {
 
             //Se valida que el campo sea un String:
-            if ($validate->validateString($data->identificacion)) {
+            if ($validate->validateNumber($data->identificacion)) {
 
                 //Agregamos el campo validado :D
                 $valid['identificacion'] = true;
@@ -30,7 +30,7 @@ trait MetodoUsuario{
             }else{
 
                 //Retornamos el error :/ :
-                die('{ "registrar":false, "error":"La identificacion debe contener caracteres alfanumericos" }');
+                die('{ "registrar":false, "error":"La identificacion no debe contener caracteres alfanumericos" }');
             }
         }else{
 
@@ -89,31 +89,12 @@ trait MetodoUsuario{
             }else{
 
                 //Retornamos el error :/ :
-                die('{ "registrar":false, "error":"El campo email es nulo" }');
+                die('{ "registrar":false, "error":"El campo email no es un tipo de dato permitido." }');
             }
         }else{
 
             //Retornamos el error :/ ):
             die('{"registrar":false, "error":"El campo email no debe estar vacio"}');
-        }
-
-        if (!empty($data->codigo_barras)) {
-
-            //Se valida que el campo sea un String:
-            if ($validate->validateNumber($data->codigo_barras)) {
-
-                //Agregamos el campo validado :D
-                $valid['codigo_barras'] = true;
-
-            }else{
-
-                //Retornamos el error :/ :
-                die('{ "registrar":false, "error":"El campo codigo_barras debe ser un numero" }');
-            }
-        }else{
-
-            //Retornamos el error :/ ):
-            die('{"registrar":false, "error":"El campo codigo_barras no debe estar vacio"}');
         }
 
         if (!empty($data->telefono)) {
@@ -153,26 +134,6 @@ trait MetodoUsuario{
 
         // Declaro el array 'valid', para almacenar los campos validados: 
         $valid = [];
-
-        //Se valida que el campo on esté vacio:
-        if (!empty($data->identificacion)) {
-
-            //Se valida que el campo sea un String:
-            if ($validate->validateString($data->identificacion)) {
-
-                //Agregamos el campo validado :D
-                $valid['identificacion'] = true;
-
-            }else{
-
-                //Retornamos el error :/ :
-                die('{ "registrar":false, "error":"La nuevo_identificacion debe contener caracteres alfanumericos" }');
-            }
-        }else{
-
-            //Retornamos el error :/ ):
-            die('{"registrar":false, "error":"El campo nuevo_identificacion no debe estar vacio"}');
-        }
 
         //Se valida que el campo on esté vacio:
         if (!empty($data->nombre)) {
@@ -225,31 +186,12 @@ trait MetodoUsuario{
             }else{
 
                 //Retornamos el error :/ :
-                die('{ "registrar":false, "error":"El campo nuevo_email es nulo" }');
+                die('{ "registrar":false, "error":"El campo nuevo_email no es un tipo de dato permitido." }');
             }
         }else{
 
             //Retornamos el error :/ ):
             die('{"registrar":false, "error":"El campo nuevo_email no debe estar vacio"}');
-        }
-
-        if (!empty($data->codigo_barras)) {
-
-            //Se valida que el campo sea un String:
-            if ($validate->validateNumber($data->codigo_barras)) {
-
-                //Agregamos el campo validado :D
-                $valid['codigo_barras'] = true;
-
-            }else{
-
-                //Retornamos el error :/ :
-                die('{ "registrar":false, "error":"El campo nuevo_codigo_barras debe ser un numero" }');
-            }
-        }else{
-
-            //Retornamos el error :/ ):
-            die('{"registrar":false, "error":"El campo nuevo_codigo_barras no debe estar vacio"}');
         }
 
         if (!empty($data->telefono)) {

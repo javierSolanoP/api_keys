@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 // Modulo usuarios: 
 Route::apiResource(name: '/roles', controller: 'App\Http\Controllers\Modulo_usuarios\API\RoleController');
 Route::apiResource(name: '/permisos', controller: 'App\Http\Controllers\Modulo_usuarios\API\PermisoController');
+Route::apiResource(name: '/usuarios', controller: 'App\Http\Controllers\Modulo_usuarios\API\UsuarioController');

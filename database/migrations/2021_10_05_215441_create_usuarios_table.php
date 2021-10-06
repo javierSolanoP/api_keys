@@ -19,7 +19,7 @@ class CreateUsuariosTable extends Migration
             $table->string(column: 'nombre', length: 100);
             $table->string(column: 'apellido', length: 100);
             $table->string(column: 'email', length: 255);
-            $table->string(column: 'codigo_barras', length: 20);
+            $table->string(column: 'password', length: 255);
             $table->string(column: 'telefono', length: 10);
             $table->unsignedBigInteger(column: 'role_id');
             $table->foreign('role_id')->references('id_role')->on('roles')->onDelete('cascade');
