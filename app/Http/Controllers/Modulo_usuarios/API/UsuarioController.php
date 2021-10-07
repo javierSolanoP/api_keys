@@ -270,4 +270,15 @@ class UsuarioController extends Controller
             return ['delete' => false, 'error' => 'No existe ese usuario en el sistema.'];
         }
     }
+
+    public function FunctionName(Type $var = null)
+    {
+        
+        
+            
+        
+        
+        
+        
+    }
 }
